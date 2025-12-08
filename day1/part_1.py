@@ -9,14 +9,12 @@ output_list = []
 agr = 50
 cnt = 0
 for x in data:
-    print(x)
     if x[0][:1] == "L":
         agr -= int(x[0][1:])
-        agr = agr % 100
     else:
         agr += int(x[0][1:])
-        agr = agr % 100
-    print(agr)
+    agr = agr % 100
+
     if agr == 0:
         cnt += 1
 print(cnt)
