@@ -1,6 +1,6 @@
 import numpy as np
 
-with open("input_sample.txt") as file:
+with open("input.txt") as file:
     data = file.read()
 
 data_list = data.splitlines()
@@ -15,16 +15,18 @@ for string_line in data_list:
 tree_array = np.array(matrix)
 
 print(tree_array[0])
-previous_line = tree_array[0] == 'S'
+previous_line = (tree_array[0] == 'S').astype(int)
 print(previous_line)
 splits = 0
 for line in tree_array[1:]:
 
-    line = line == '^'
+    line = (line == '^')
 
     hits = previous_line * line
-    splits += sum(hits)
+    # splits += sum((np.append(hits[1:],False) + np.append(False,hits[:-1])))
+    splits = sum(previous_line)
+    # print(splits)
     previous_line = (np.append(hits[1:],False) + np.append(False,hits[:-1])) + (previous_line ^ hits)
-    print(previous_line.astype(int))
+    print(previous_line)
 
 print(splits)
